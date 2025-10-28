@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 class="mb-4">👤 利用者一覧</h2>
+
+<table class="table table-striped table-bordered">
+  <thead class="table-success">
+    <tr>
+      <th>ID</th>
+      <th>名前</th>
+      <th>メールアドレス</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for user in users %}
+    <tr>
+      <td>{{ user[0] }}</td>
+      <td>{{ user[1] }}</td>
+      <td>{{ user[2] }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<hr>
+
+<!-- ボタンだけ最初に表示 -->
+<button id="showFormBtn" class="btn btn-primary mb-3">新しい利用者を登録</button>
+
+<!-- 登録フォームは最初は非表示 -->
+<div id="userForm" style="display:none;">
+  <form action="/users/add" method="POST" class="shadow p-4 bg-white rounded">
+    <div class="mb-3">
+      <label class="form-label">名前</label>
+      <input type="text" name="name" class="form-control" required>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">メールアドレス</label>
+      <input type="email" name="email" class="form-control" required>
+    </div>
+    <button type="submit" class="btn btn-success">登録</button>
+  </form>
+</div>
+
+<!-- フォーム表示用スクリプト -->
+<script>
+  const btn = document.getElementById('showFormBtn');
+  const form = document.getElementById('userForm');
+
+  btn.addEventListener('click', () => {
+    form.style.display = form.style.display === 'none' ? 'block' : 'none';
+    btn.textContent = form.style.display === 'block' ? 'フォームを閉じる' : '新しい利用者を登録';
+  });
+</script>
+{% endblock %}

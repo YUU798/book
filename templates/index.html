@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="text-center mt-5">
+    <h1 class="mb-3">📖 ようこそ、図書管理システムへ！</h1>
+    <p class="lead">下のメニューから操作を選んでください。</p>
+    <div class="mt-4">
+        <a href="/books" class="btn btn-primary btn-lg m-2">図書一覧</a>
+        <a href="/users" class="btn btn-success btn-lg m-2">利用者一覧</a>
+        <a href="/loan_book" class="btn btn-warning btn-lg m-2">貸出処理</a>
+    </div>
+</div>
+{% endblock %}

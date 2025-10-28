@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 class="mb-4">📗 貸出登録</h2>
+
+<form action="/loan" method="POST" class="shadow p-4 bg-white rounded">
+  <div class="mb-3">
+    <label class="form-label">利用者</label>
+    <select name="user_id" class="form-select" required>
+      <option value="">選択してください</option>
+      {% for user in users %}
+        <option value="{{ user[0] }}">{{ user[1] }}</option>
+      {% endfor %}
+    </select>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">貸し出す図書</label>
+    <select name="book_id" class="form-select" required>
+      <option value="">選択してください</option>
+      {% for book in books %}
+        <option value="{{ book[0] }}">{{ book[1] }}</option>
+      {% endfor %}
+    </select>
+  </div>
+
+  <button type="submit" class="btn btn-warning">貸出登録</button>
+</form>
+{% endblock %}

@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 class="mb-4">📚 図書一覧</h2>
+
+<table class="table table-striped table-bordered">
+  <thead class="table-primary">
+    <tr>
+      <th>ID</th>
+      <th>タイトル</th>
+      <th>著者</th>
+      <th>ISBN</th>
+      <th>状態</th>
+      <th>操作</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for book in books %}
+    <tr>
+      <td>{{ book[0] }}</td>
+      <td>{{ book[1] }}</td>
+      <td>{{ book[2] }}</td>
+      <td>{{ book[3] }}</td>
+<td>
+  {% if book[4] == "available" %}
+    <span class="badge bg-success">利用可</span>
+  {% else %}
+    <span class="badge bg-warning text-dark">
+      貸出中 (利用者ID: {{ book[5] }})
+    </span>
+  {% endif %}
+</td>
+      <td>
+        {% if book[4] == "loaned" %}
+          <a href="/return/{{ book[0] }}" class="btn btn-sm btn-primary">返却</a>
+        {% endif %}
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<hr>
+
+<!-- ボタンだけ最初に表示 -->
+<button id="showBookFormBtn" class="btn btn-primary mb-3">新しい図書を登録</button>
+
+<!-- 登録フォームは最初は非表示 -->
+<div id="bookForm" style="display:none;">
+  <form action="/books/add" method="POST" class="shadow p-4 bg-white rounded">
+    <div class="mb-3">
+      <label class="form-label">タイトル</label>
+      <input type="text" name="title" class="form-control" required>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">著者</label>
+      <input type="text" name="author" class="form-control" required>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">ISBN</label>
+      <input type="text" name="isbn" class="form-control">
+    </div>
+    <button type="submit" class="btn btn-success">登録</button>
+  </form>
+</div>
+
+<!-- フォーム表示用スクリプト -->
+<script>
+  const bookBtn = document.getElementById('showBookFormBtn');
+  const bookForm = document.getElementById('bookForm');
+
+  bookBtn.addEventListener('click', () => {
+    bookForm.style.display = bookForm.style.display === 'none' ? 'block' : 'none';
+    bookBtn.textContent = bookForm.style.display === 'block' ? 'フォームを閉じる' : '新しい図書を登録';
+  });
+</script>
+{% endblock %}

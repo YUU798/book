@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 class="mb-4">👤 新しい利用者を登録</h2>
+
+<form action="/users/add" method="POST" class="shadow p-4 bg-white rounded">
+  <div class="mb-3">
+    <label class="form-label">名前</label>
+    <input type="text" name="name" class="form-control" required>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">メールアドレス</label>
+    <input type="email" name="email" class="form-control" required>
+  </div>
+  <button type="submit" class="btn btn-success">登録</button>
+  <a href="/users" class="btn btn-secondary">戻る</a>
+</form>
+{% endblock %}
